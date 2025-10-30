@@ -19,7 +19,7 @@
 
 ## 📋 Descripción
 
-Sistema web completo de gestión de biblioteca desarrollado para el Instituto Politécnico de Tucumán (IPT). Permite administrar libros, usuarios, préstamos, generar reportes y realizar backups de la base de datos.
+Sistema web completo de gestión de biblioteca desarrollado para el Instituto Privado Tucumán (IPT). Permite administrar libros, usuarios, préstamos, generar reportes y realizar backups de la base de datos.
 
 ### 🎯 Características Principales
 
@@ -426,22 +426,21 @@ Ver documentación específica en:
 
 ## 👨‍💻 Autor
 
-**Guido Fariña**
-- GitHub: [@GuidoFC](https://github.com/tu-usuario)
-- LinkedIn: [Tu Perfil](https://linkedin.com/in/tu-perfil)
-
+**Guido Alfredo Albarracín**
+- GitHub: https://github.com/VildandenTuc
+- LinkedIn: linkedin.com/in/guido-alfredo-albarracín-b8457966
+- Web: guido-cv.netlify.app/
 ---
 
 ## 📝 Licencia
 
-Este proyecto fue desarrollado como trabajo final para el Instituto Politécnico de Tucumán (IPT).
+Este proyecto fue desarrollado para el Instituto Privado Tucumán (IPT), Argentina.
 
 ---
 
 ## 🙏 Agradecimientos
 
-- Instituto Politécnico de Tucumán (IPT)
-- Profesores y tutores del curso
+- Instituto Privado Tucumán (IPT)
 - Comunidad de Spring Boot y React
 
 ---
