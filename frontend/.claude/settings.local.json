@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/Programacion/5-Proyectos/Proyecto_BibliotecaIPT/**)",
+      "Bash(curl:*)",
+      "Bash(npm run dev:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(tasklist)",
+      "Bash(findstr:*)",
+      "Bash(npm run build:*)",
+      "Read(//d/Programacion/5-Proyectos/**)",
+      "Bash(del:*)",
+      "Bash(timeout:*)",
+      "Bash(netstat:*)",
+      "Read(//c/Users/guido/OneDrive/Escritorio/Borrar/**)",
+      "Bash(dir)",
+      "Bash(mvn clean:*)",
+      "Bash(mvnw.cmd clean:*)",
+      "Bash(./mvnw:*)",
+      "Bash(taskkill:*)",
+      "Bash(.mvnw.cmd clean compile)",
+      "Bash(dir:*)",
+      "Bash(cmd.exe /c mvnw.cmd clean compile)",
+      "Bash(cmd.exe /c \"mvnw.cmd clean compile\")",
+      "Bash(npm install:*)",
+      "Bash(rm:*)",
+      "Bash(powershell -Command:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nfeat: Implementar sistema completo de backup y restauración de base de datos\n\nAgregado sistema de gestión de backups para administradores:\n- BackupController: Endpoints REST para generar, restaurar, listar y eliminar backups\n- BackupService: Lógica de negocio usando mysqldump para backup y mysql para restore\n- BackupInfoDTO: DTO como Record siguiendo estándares del proyecto\n\nEndpoints implementados:\n- POST /api/backup/export: Generar y descargar backup\n- POST /api/backup/import: Restaurar backup desde archivo .sql\n- GET /api/backup/list: Listar backups disponibles\n- GET /api/backup/download/{filename}: Descargar backup específico\n- DELETE /api/backup/{filename}: Eliminar backup\n\nSeguridad:\n- Solo accesible para rol ADMIN (@PreAuthorize)\n- Validación de archivos .sql únicamente\n- Prevención de path traversal\n- Logs de auditoría completos\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(D:/Programacion/5-Proyectos/Proyecto_BibliotecaIPT/mvnw.cmd clean compile)",
+      "Bash(cmd.exe:*)",
+      "Bash(where:*)",
+      "Bash(cat:*)",
+      "Bash(robocopy:*)",
+      "Bash(powershell:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

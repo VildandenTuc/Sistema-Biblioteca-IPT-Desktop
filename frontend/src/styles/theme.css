@@ -1,0 +1,459 @@
+/* ========================================
+   SISTEMA DE TEMAS - BIBLIOTECA IPT
+   ======================================== */
+
+/* Variables CSS para Light Theme (por defecto) */
+:root,
+.light-theme {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --text-muted: #adb5bd;
+
+  --border-color: #dee2e6;
+  --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --shadow-md: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+
+  --navbar-bg: #ffffff;
+  --card-bg: #ffffff;
+  --table-hover: #f8f9fa;
+
+  --link-color: #0d6efd;
+  --link-hover: #0a58ca;
+}
+
+/* Variables CSS para Dark Theme */
+.dark-theme {
+  --bg-primary: #1a1d23;
+  --bg-secondary: #22262e;
+  --bg-tertiary: #2d3139;
+
+  --text-primary: #e9ecef;
+  --text-secondary: #adb5bd;
+  --text-muted: #6c757d;
+
+  --border-color: #3d4149;
+  --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+
+  --navbar-bg: #22262e;
+  --card-bg: #22262e;
+  --table-hover: #2d3139;
+
+  --link-color: #6ea8fe;
+  --link-hover: #9ec5fe;
+}
+
+/* Aplicar variables a elementos principales */
+html,
+body,
+#root {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+
+/* Aplicar fondo del tema a TODOS los containers */
+.container,
+.container-fluid {
+  background-color: var(--bg-primary);
+}
+
+/* Container dentro del navbar NO debe tener fondo - regla más específica */
+.navbar-custom .container,
+.navbar-custom .container-fluid,
+.navbar .container,
+.navbar .container-fluid {
+  background-color: transparent !important;
+}
+
+/* Navbar - Siempre azul independiente del tema */
+.navbar-custom {
+  background-color: #0d6efd !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+/* Forzar que el navbar no sea afectado por data-bs-theme */
+[data-bs-theme="light"] .navbar-custom,
+[data-bs-theme="dark"] .navbar-custom,
+html[data-bs-theme="light"] .navbar-custom,
+html[data-bs-theme="dark"] .navbar-custom {
+  background-color: #0d6efd !important;
+}
+
+.navbar,
+.navbar.bg-primary,
+.navbar-dark,
+.bg-primary.navbar {
+  background-color: #0d6efd !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Textos del navbar - siempre blancos independiente del tema */
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link,
+[data-bs-theme="light"] .navbar-custom .navbar-brand,
+[data-bs-theme="light"] .navbar-custom .nav-link,
+[data-bs-theme="dark"] .navbar-custom .navbar-brand,
+[data-bs-theme="dark"] .navbar-custom .nav-link {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.navbar-custom .nav-link:hover,
+[data-bs-theme="light"] .navbar-custom .nav-link:hover,
+[data-bs-theme="dark"] .navbar-custom .nav-link:hover {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.navbar-custom .nav-link.active,
+[data-bs-theme="light"] .navbar-custom .nav-link.active,
+[data-bs-theme="dark"] .navbar-custom .nav-link.active {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Reglas genéricas para navbar (backup) */
+.navbar .navbar-brand,
+.navbar .nav-link {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.navbar .nav-link:hover {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar .nav-link.active {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Cards */
+.card {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.card-body {
+  background-color: var(--card-bg);
+}
+
+.card-header {
+  background-color: var(--bg-tertiary);
+  border-bottom-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Tables */
+.table {
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.table-light {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.table-hover tbody tr:hover {
+  background-color: var(--table-hover);
+  color: var(--text-primary);
+}
+
+.table thead th {
+  border-color: var(--border-color);
+}
+
+.table td,
+.table th {
+  border-color: var(--border-color);
+}
+
+/* Forms */
+.form-control,
+.form-select {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--bg-secondary);
+  border-color: #0d6efd;
+  color: var(--text-primary);
+}
+
+.form-control::placeholder {
+  color: var(--text-muted);
+}
+
+/* Input Groups */
+.input-group-text {
+  background-color: var(--bg-tertiary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Modals */
+.modal-content {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.modal-header {
+  background-color: var(--bg-secondary);
+  border-bottom-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.modal-body {
+  color: var(--text-primary);
+}
+
+.modal-footer {
+  border-top-color: var(--border-color);
+}
+
+/* Alerts */
+.dark-theme .alert {
+  background-color: var(--bg-tertiary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Pagination */
+.pagination .page-link {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.pagination .page-link:hover {
+  background-color: var(--bg-tertiary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+/* Dropdowns */
+.dropdown-menu {
+  background-color: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: var(--shadow-md);
+}
+
+.dropdown-item {
+  color: var(--text-primary) !important;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+}
+
+.dropdown-item:active {
+  background-color: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+}
+
+.dropdown-divider {
+  border-top-color: var(--border-color) !important;
+}
+
+/* Asegurar legibilidad en dropdowns del navbar específicamente */
+.navbar .dropdown-menu {
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.navbar .dropdown-item {
+  color: var(--text-primary) !important;
+}
+
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:focus {
+  background-color: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Modo oscuro - forzar colores en dropdowns */
+.dark-theme .dropdown-menu,
+[data-bs-theme="dark"] .dropdown-menu {
+  background-color: #22262e !important;
+  border-color: #3d4149 !important;
+}
+
+.dark-theme .dropdown-item,
+[data-bs-theme="dark"] .dropdown-item {
+  color: #e9ecef !important;
+}
+
+.dark-theme .dropdown-item:hover,
+.dark-theme .dropdown-item:focus,
+[data-bs-theme="dark"] .dropdown-item:hover,
+[data-bs-theme="dark"] .dropdown-item:focus {
+  background-color: #2d3139 !important;
+  color: #e9ecef !important;
+}
+
+.dark-theme .dropdown-divider,
+[data-bs-theme="dark"] .dropdown-divider {
+  border-top-color: #3d4149 !important;
+}
+
+/* Navbar Dropdowns - mantener texto blanco en el toggle */
+.navbar-custom .dropdown-toggle,
+[data-bs-theme="light"] .navbar-custom .dropdown-toggle,
+[data-bs-theme="dark"] .navbar-custom .dropdown-toggle {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.navbar-custom .dropdown-toggle:hover,
+[data-bs-theme="light"] .navbar-custom .dropdown-toggle:hover,
+[data-bs-theme="dark"] .navbar-custom .dropdown-toggle:hover {
+  color: white !important;
+}
+
+/* Badge contador en navbar siempre visible (solo el badge del icono campana) */
+.navbar-custom > .badge,
+.navbar-custom .position-relative > .badge.position-absolute,
+[data-bs-theme="light"] .navbar-custom > .badge,
+[data-bs-theme="light"] .navbar-custom .position-relative > .badge.position-absolute,
+[data-bs-theme="dark"] .navbar-custom > .badge,
+[data-bs-theme="dark"] .navbar-custom .position-relative > .badge.position-absolute {
+  color: white !important;
+  background-color: #dc3545 !important;
+}
+
+/* Badges dentro de dropdowns - mantener colores Bootstrap */
+.dropdown-menu .badge.bg-warning {
+  background-color: #ffc107 !important;
+  color: #000 !important;
+}
+
+.dropdown-menu .badge.bg-danger {
+  background-color: #dc3545 !important;
+  color: white !important;
+}
+
+.dropdown-menu .badge.bg-info {
+  background-color: #0dcaf0 !important;
+  color: #000 !important;
+}
+
+/* Iconos en navbar siempre visibles */
+.navbar-custom svg,
+.navbar-custom .fa,
+.navbar-custom .fas,
+.navbar-custom .far,
+[data-bs-theme="light"] .navbar-custom svg,
+[data-bs-theme="light"] .navbar-custom .fa,
+[data-bs-theme="dark"] .navbar-custom svg,
+[data-bs-theme="dark"] .navbar-custom .fa {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Botones en navbar */
+.navbar-custom .btn,
+[data-bs-theme="light"] .navbar-custom .btn,
+[data-bs-theme="dark"] .navbar-custom .btn {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Offcanvas en mobile - mantener textos visibles */
+.offcanvas.bg-primary .nav-link,
+.offcanvas.bg-primary .navbar-brand,
+.offcanvas.bg-primary .dropdown-toggle {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Links */
+a {
+  color: var(--link-color);
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+/* Text utilities */
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+/* Footer */
+footer {
+  background-color: var(--navbar-bg);
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+/* Spinners y Loading */
+.spinner-border {
+  border-color: var(--text-muted);
+  border-right-color: transparent;
+}
+
+/* Shadow utilities */
+.shadow-sm {
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.shadow {
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* Transition suave para todos los elementos al cambiar tema */
+*,
+*::before,
+*::after {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Excluir transiciones de elementos específicos */
+.btn,
+.spinner-border,
+.progress-bar,
+.carousel-item {
+  transition: none;
+}
+
+/* Ajustes específicos para el modo oscuro */
+.dark-theme .bg-light {
+  background-color: var(--bg-secondary) !important;
+}
+
+.dark-theme .bg-white {
+  background-color: var(--bg-primary) !important;
+}
+
+.dark-theme .border {
+  border-color: var(--border-color) !important;
+}
+
+/* Theme Toggle Button Styles */
+.theme-toggle-btn {
+  border-radius: 50px;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.05);
+}

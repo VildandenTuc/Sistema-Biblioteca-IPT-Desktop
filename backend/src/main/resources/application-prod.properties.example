@@ -1,0 +1,81 @@
+# ========================================
+# PERFIL DE PRODUCCIÓN (prod)
+# ========================================
+# Para activar: spring.profiles.active=prod
+
+# ========================================
+# Base de datos - Producción
+# ========================================
+# Usar variables de entorno del servidor (NUNCA hardcodear valores)
+spring.datasource.url=jdbc:mysql://${DB_HOST}:${DB_PORT:3306}/${DB_NAME}
+spring.datasource.username=${DB_USERNAME}
+spring.datasource.password=${DB_PASSWORD}
+
+# Pool de conexiones optimizado para producción
+spring.datasource.hikari.maximum-pool-size=20
+spring.datasource.hikari.minimum-idle=5
+spring.datasource.hikari.connection-timeout=30000
+spring.datasource.hikari.idle-timeout=600000
+spring.datasource.hikari.max-lifetime=1800000
+
+# ========================================
+# JPA/Hibernate - Producción
+# ========================================
+# En producción: NO mostrar SQL (mejor performance)
+spring.jpa.show-sql=false
+spring.jpa.properties.hibernate.format_sql=false
+# validate = solo valida el schema (SEGURO para producción)
+spring.jpa.hibernate.ddl-auto=validate
+
+# ========================================
+# JWT - Producción
+# ========================================
+# Clave secreta fuerte (configurar en variables de entorno del servidor)
+biblioteca.jwt.secret=${JWT_SECRET}
+# Expiración menor en producción (ej: 1 hora = 3600000)
+biblioteca.jwt.expiration=${JWT_EXPIRATION:3600000}
+
+# ========================================
+# Backups - Producción
+# ========================================
+# Directorio en servidor Linux (configurar según servidor)
+backup.directory=${BACKUP_DIRECTORY:/var/backups/biblioteca}
+backup.mysqldump.path=${MYSQLDUMP_PATH:/usr/bin/mysqldump}
+backup.mysql.path=${MYSQL_PATH:/usr/bin/mysql}
+
+# ========================================
+# Logging - Producción
+# ========================================
+# Nivel de logs menos verboso (solo errores y warnings)
+logging.level.com.biblioteca=INFO
+logging.level.org.springframework.web=WARN
+logging.level.org.hibernate=WARN
+
+# Configurar archivo de logs en producción
+logging.file.name=/var/log/biblioteca/application.log
+logging.file.max-size=10MB
+logging.file.max-history=30
+logging.pattern.console=%d{yyyy-MM-dd HH:mm:ss} - %msg%n
+logging.pattern.file=%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+
+# ========================================
+# Seguridad - Producción
+# ========================================
+# Deshabilitar endpoints de actuator sensibles
+management.endpoints.web.exposure.include=health,info
+management.endpoint.health.show-details=when-authorized
+
+# ========================================
+# CORS - Producción
+# ========================================
+# Configurar en WebConfig con dominios específicos permitidos
+# NUNCA usar allowedOrigins("*") en producción
+
+# ========================================
+# IMPORTANTE:
+# ========================================
+# - Todas las variables de entorno DEBEN configurarse en el servidor
+# - NUNCA commitear valores reales de producción al repositorio
+# - Usar systemd, docker-compose, o herramientas del servidor para variables de entorno
+# - Configurar backups automáticos del archivo .env en el servidor
+# - Rotar JWT_SECRET periódicamente

@@ -1,0 +1,46 @@
+# ========================================
+# PERFIL DE DESARROLLO (dev)
+# ========================================
+# Para activar: spring.profiles.active=dev
+
+# ========================================
+# Base de datos - Desarrollo
+# ========================================
+spring.datasource.url=jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:dbbiblioteca}
+spring.datasource.username=${DB_USERNAME:root}
+spring.datasource.password=${DB_PASSWORD}
+
+# ========================================
+# JPA/Hibernate - Desarrollo
+# ========================================
+# En desarrollo: mostrar SQL para debugging
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+# validate = solo valida el schema (NO modifica la BD)
+spring.jpa.hibernate.ddl-auto=validate
+
+# ========================================
+# JWT - Desarrollo
+# ========================================
+# Expiración más larga en dev (24 horas)
+biblioteca.jwt.expiration=${JWT_EXPIRATION:86400000}
+
+# ========================================
+# Backups - Desarrollo
+# ========================================
+# Directorio local de desarrollo
+backup.directory=${BACKUP_DIRECTORY:D:/backups/biblioteca-dev}
+
+# ========================================
+# Logging - Desarrollo
+# ========================================
+# Nivel de logs más detallado en desarrollo
+logging.level.com.biblioteca=DEBUG
+logging.level.org.springframework.web=DEBUG
+logging.level.org.hibernate.SQL=DEBUG
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE
+
+# ========================================
+# CORS - Desarrollo (permitir localhost)
+# ========================================
+# Configurar en WebConfig si es necesario

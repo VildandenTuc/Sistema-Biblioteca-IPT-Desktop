@@ -1,0 +1,117 @@
+# ============================================
+# GITIGNORE GLOBAL - Sistema Biblioteca IPT
+# ============================================
+
+# ===== ARCHIVOS SENSIBLES (CRÍTICO) =====
+# NUNCA versionar archivos con credenciales
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.jks
+application.properties
+!application.properties.example
+!application-dev.properties.example
+!application-prod.properties.example
+
+# ===== BACKEND (Spring Boot / Maven) =====
+
+# Build y compilación
+target/
+build/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Logs
+*.log
+logs/
+
+# IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.project
+.classpath
+.factorypath
+bin/
+
+# Sistema operativo
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Archivos temporales
+*.swp
+*.swo
+*~
+*.tmp
+*.temp
+
+# Maven
+.mvn/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# ===== FRONTEND (React / Vite / Node) =====
+
+# Dependencias
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.pnp
+.pnp.js
+
+# Build
+dist/
+dist-ssr/
+build/
+
+# Cache y temporales
+.cache/
+*.local
+.vite/
+
+# Testing
+coverage/
+.nyc_output/
+
+# ===== BACKUPS =====
+# Carpeta de backups de la aplicación
+backups/
+*.sql
+*.dump
+*.backup
+
+# ===== OTROS =====
+
+# Archivos de documentación generados
+*.pdf
+!docs/**/*.pdf
+
+# Archivos grandes
+*.zip
+*.rar
+*.tar
+*.gz
+*.7z
+
+# Certificados SSL (desarrollo local)
+*.crt
+*.cer
+
+# Base de datos local
+*.db
+*.sqlite
+*.sqlite3

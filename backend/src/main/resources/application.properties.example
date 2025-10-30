@@ -1,0 +1,67 @@
+# ========================================
+# TEMPLATE PÚBLICO - application.properties
+# ========================================
+# Este archivo muestra la configuración usando variables de entorno
+# Para usar: copia este archivo a application.properties (está en .gitignore)
+
+spring.application.name=biblioteca
+spring.output.ansi.enabled=ALWAYS
+
+# ========================================
+# Configuración de la base de datos
+# ========================================
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:dbbiblioteca}
+spring.datasource.username=${DB_USERNAME:root}
+spring.datasource.password=${DB_PASSWORD}
+
+# ========================================
+# Configuración de Hibernate
+# ========================================
+spring.jpa.hibernate.ddl-auto=validate
+spring.jpa.show-sql=${SHOW_SQL:false}
+spring.jpa.properties.hibernate.format_sql=${FORMAT_SQL:false}
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+
+# ========================================
+# Configuración de Flyway
+# ========================================
+spring.flyway.enabled=true
+spring.flyway.table=flyway_schema_history
+spring.flyway.user=${DB_USERNAME:root}
+spring.flyway.password=${DB_PASSWORD}
+spring.flyway.locations=classpath:db/migration
+spring.flyway.baseline-on-migrate=true
+
+# ========================================
+# Configuración JWT
+# ========================================
+# Clave secreta (>= 32 caracteres para 256 bits)
+biblioteca.jwt.secret=${JWT_SECRET}
+# Expiración en milisegundos (24 horas = 86400000)
+biblioteca.jwt.expiration=${JWT_EXPIRATION:86400000}
+
+# ========================================
+# Configuración de Backups
+# ========================================
+backup.directory=${BACKUP_DIRECTORY}
+backup.mysqldump.path=${MYSQLDUMP_PATH}
+backup.mysql.path=${MYSQL_PATH}
+
+# ========================================
+# Configuración de Multipart/Upload
+# ========================================
+spring.servlet.multipart.max-file-size=100MB
+spring.servlet.multipart.max-request-size=100MB
+
+# ========================================
+# Otros
+# ========================================
+spring.main.allow-bean-definition-overriding=true
+spring.devtools.restart.additional-exclude=**/*.properties
+
+# ========================================
+# SINTAXIS DE VARIABLES DE ENTORNO:
+# ========================================
+# ${VARIABLE:default} - Usa la variable de entorno, si no existe usa el default
+# ${VARIABLE} - Usa la variable de entorno, falla si no existe (recomendado para secrets)

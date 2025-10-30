@@ -1,0 +1,127 @@
+version: '3.8'
+
+# ========================================
+# Sistema de Gestión de Biblioteca IPT
+# Docker Compose - Aplicación Standalone
+# ========================================
+
+services:
+  # ===========================
+  # Base de datos MySQL 8.0
+  # ===========================
+  mysql:
+    image: mysql:8.0
+    container_name: biblioteca-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-BibliotecaRoot2024!}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-dbbiblioteca}
+      MYSQL_USER: ${MYSQL_USER:-biblioteca_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-BibliotecaPass2024!}
+      TZ: America/Argentina/Buenos_Aires
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./backups:/backups
+    networks:
+      - biblioteca-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-BibliotecaRoot2024!}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+  # ===========================
+  # Backend - Spring Boot API
+  # ===========================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: biblioteca-backend
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      # Database connection
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: ${MYSQL_DATABASE:-dbbiblioteca}
+      DB_USERNAME: ${MYSQL_USER:-biblioteca_user}
+      DB_PASSWORD: ${MYSQL_PASSWORD:-BibliotecaPass2024!}
+
+      # JWT Configuration
+      JWT_SECRET: ${JWT_SECRET:-MiClaveSecretaSuperSeguraParaJWT2024BibliotecaIPTMinimo32Caracteres}
+      JWT_EXPIRATION: ${JWT_EXPIRATION:-86400000}
+
+      # Backup configuration
+      BACKUP_DIRECTORY: /backups
+      MYSQLDUMP_PATH: /usr/bin/mysqldump
+      MYSQL_PATH: /usr/bin/mysql
+
+      # Spring Boot configuration
+      SHOW_SQL: ${SHOW_SQL:-false}
+      FORMAT_SQL: ${FORMAT_SQL:-false}
+      JAVA_OPTS: ${JAVA_OPTS:--Xmx512m -Xms256m}
+
+      # Timezone
+      TZ: America/Argentina/Buenos_Aires
+    ports:
+      - "${BACKEND_PORT:-8080}:8080"
+    volumes:
+      - ./backups:/backups
+    networks:
+      - biblioteca-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/actuator/health", "||", "exit", "1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+
+  # ===========================
+  # Frontend - React + Nginx
+  # ===========================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: http://localhost:${BACKEND_PORT:-8080}
+    container_name: biblioteca-frontend
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      TZ: America/Argentina/Buenos_Aires
+    ports:
+      - "${FRONTEND_PORT:-3000}:80"
+    networks:
+      - biblioteca-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80/", "||", "exit", "1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+# ===========================
+# Volúmenes persistentes
+# ===========================
+volumes:
+  mysql_data:
+    driver: local
+    name: biblioteca-mysql-data
+
+# ===========================
+# Red interna
+# ===========================
+networks:
+  biblioteca-network:
+    driver: bridge
+    name: biblioteca-network

@@ -1,0 +1,54 @@
+# ========================================
+# .dockerignore - Sistema Biblioteca IPT
+# ========================================
+# Archivos a ignorar al construir imágenes Docker
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Docker
+docker-compose.yml
+.dockerignore
+Dockerfile
+*.bat
+
+# Documentation
+*.md
+docs/
+
+# IDE
+.idea/
+.vscode/
+.eclipse/
+.settings/
+*.iml
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Backups
+backups/
+*.sql
+*.backup
+
+# Logs
+logs/
+*.log
+
+# Temporary
+tmp/
+temp/
+*.tmp
+
+# Environment
+.env
+.env.*
+!.env.example
+!.env.docker
